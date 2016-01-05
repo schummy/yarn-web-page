@@ -1,0 +1,23 @@
+spring:
+    hadoop:
+        fsUri: hdfs://127.0.0.1:9000
+        resourceManagerHost: 127.0.0.1
+    yarn:
+        appName: gs-yarn-basic
+        applicationDir: /app/gs-yarn-basic/
+        client:
+            files:
+              - "file:gs-yarn-basic-dist/target/gs-yarn-basic-dist/gs-yarn-basic-container-0.1.0.jar"
+              - "file:gs-yarn-basic-dist/target/gs-yarn-basic-dist/gs-yarn-basic-appmaster-0.1.0.jar"
+              - "file:gs-yarn-basic-dist/test.html"
+              - "file:gs-yarn-basic-container/src/main/webapp/index.html"
+              - "file:gs-yarn-basic-container/src/main/webapp/web-inf/web.xml"
+            launchcontext:
+                archiveFile: gs-yarn-basic-appmaster-0.1.0.jar
+        appmaster:
+            containerCount: 1
+            launchcontext:
+                archiveFile: gs-yarn-basic-container-0.1.0.jar
+                files:
+                  - "file:gs-yarn-basic-container/src/main/webapp/index.html"
+                  - "file:gs-yarn-basic-container/src/main/webapp/web-inf/web.xml"
